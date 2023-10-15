@@ -6,6 +6,7 @@ public class Plane {
     private int numEmptySeat;
     public Plane() {
         this.seats = new PlaneSeat[12];
+        this.numEmptySeat = 12;
         for (int i = 0; i < 12; ) {
             this.seats[i] = new PlaneSeat(++i);
         }
@@ -17,28 +18,35 @@ public class Plane {
         return seats2;
     }
     public void showNumEmptySeats() {
-        int num = 0;
-        for (PlaneSeat seat: this.seats)  {
-            if (!seat.isOccupied()) ++num;
-        }
-        System.out.println("There are "+num+" empty seats\r\n");
+//        int num = 0;
+//        for (PlaneSeat seat: this.seats)  {
+//            if (!seat.isOccupied()) ++num;
+//        }
+        System.out.println("There are "+numEmptySeat+" empty seats\r\n");
 
     }
     public void showEmptySeats() {
         System.out.println("The following seats are empty:");
-        boolean isFull = true;
+        //boolean isFull = true;
+        if (numEmptySeat <1) {
+            System.out.println("all Occupied!");
+            return;
+        }
         for (PlaneSeat seat: this.seats)  {
             if (seat.isOccupied()) continue;
-            isFull = false;
+            //isFull = false;
             System.out.print("SeatID ");
             System.out.println(seat.getSeatID());
         }
-        if (isFull) {
-            System.out.println("all Occupied!");
-        }
+//        if (isFull) {
+//
+//        }
     }
     public void showAssignedSeats(boolean bySeatId) {
         PlaneSeat[] seats2;
+        if (numEmptySeat >11) {
+            System.out.println("no Occupied seat!");
+        }
         if (bySeatId) {
             seats2 = this.seats;
         } else {
@@ -51,15 +59,21 @@ public class Plane {
             isEmptySeat = false;
             System.out.println("SeatID "+seat.getSeatID()+" assigned to CustomerID "+seat.getCustomerID()+".");
         }
-        if (isEmptySeat) {
-            System.out.println("no Occupied seat!");
-        }
+//        if (isEmptySeat) {
+//            System.out.println("no Occupied seat!");
+//        }
         System.out.println();
     }
     public void assignSeat(int seatId, int cust_id) throws SeatNotFoundException {
         for (PlaneSeat seat: this.seats) {
             if(seat.getSeatID() == seatId) {
+                if (seat.isOccupied()) {
+                    System.out.println("Seat already assigned to a customer.");
+                    return;
+                }
+
                 seat.assign(cust_id);
+                --numEmptySeat;
                 return;
             }
         }
@@ -68,7 +82,9 @@ public class Plane {
     public void unAssignSeat(int seatId) throws SeatNotFoundException {
         for (PlaneSeat seat: this.seats) {
             if(seat.getSeatID() == seatId) {
+
                 seat.unAssign();
+                ++numEmptySeat;
                 return;
             }
         }

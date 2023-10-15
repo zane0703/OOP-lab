@@ -29,7 +29,7 @@ public class Main {
                     listAssignBySeatId();
                     break;
                 case 4:
-                    listAssignByCust();
+                    listAssignByCustomerID();
                     break;
                 case 5:
                     assignSeat();
@@ -57,7 +57,7 @@ public class Main {
     public static void listAssignBySeatId() {
         plane.showAssignedSeats(true);
     }
-    public static void listAssignByCust() {
+    public static void listAssignByCustomerID() {
         plane.showAssignedSeats(false);
     }
     public static void assignSeat() {
