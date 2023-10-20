@@ -1,3 +1,5 @@
+package part1;
+
 import java.util.Objects;
 
 public class SalePerson implements Comparable<SalePerson>{
@@ -16,7 +18,7 @@ public class SalePerson implements Comparable<SalePerson>{
 
     @Override
     public String toString() {
-        return new StringBuilder(lastName).append(new char[]{' ', ','}).append(lastName).append(new char[]{' ',':', ' '}).append(totalSales).toString();
+        return new StringBuilder(lastName).append(new char[]{' ', ','}).append(firstName).append(new char[]{' ',':', ' '}).append(totalSales).toString();
     }
     @Override
     public boolean equals(Object that) {
