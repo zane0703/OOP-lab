@@ -5,8 +5,7 @@ import java.util.Objects;
 public class SalePerson implements Comparable<SalePerson>{
 
 
-     private final String firstName;
-
+    private final String firstName;
     private final String lastName;
     private final int totalSales;
 
